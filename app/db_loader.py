@@ -29,6 +29,7 @@ def fetch_from_csv():
         if first_line:
             first_line = False
             continue
+        #Limit to prevent heroku overflow
         if count >= 9995:
             return
         line, address = extract_address(line)
