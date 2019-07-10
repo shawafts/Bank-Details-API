@@ -84,3 +84,12 @@ curl -H "Content-Type: application/json" \
 --data '{"name" : "shawaf" , "key": "dasdas324das"}' \
 http://127.0.0.1:5000/v1/auth/register
 ```
+
+Output:
+```sh
+{
+    "status": "success",
+    "message": "Successfully created token",
+    "auth_token": <TOKEN>
+}
+```
