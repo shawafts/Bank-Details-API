@@ -24,11 +24,13 @@ def fetch_from_csv():
         print("Database is already populated")
         return
     print("Loading data to database...")
+    count = 0
     for line in content:
         if first_line:
             first_line = False
             continue
-        
+        if count >= 9995:
+            return
         line, address = extract_address(line)
         line = line.split(',')
 
@@ -40,6 +42,7 @@ def fetch_from_csv():
         try:
             db.session.add(new_data)
             db.session.commit()
+            count += 1
         except Exception as e:
             #pass
             print ("Exception:", e)
