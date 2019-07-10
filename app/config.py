@@ -24,6 +24,6 @@ class DevelopmentConfig(BaseConfig):
     """
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', postgres_local_base + database_name)
-    AUTH_TOKEN_EXPIRY_DAYS = 1
+    AUTH_TOKEN_EXPIRY_DAYS = 5
     AUTH_TOKEN_EXPIRY_SECONDS = 0
 
