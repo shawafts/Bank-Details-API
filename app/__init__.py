@@ -28,11 +28,6 @@ ma = Marshmallow(app)
 # Import the application views
 from app import views
 
-# Loading data to database if not loaded
-from app.db_loader import populate_db
-populate_db()
-
-
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp)
 
