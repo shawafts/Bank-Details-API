@@ -12,11 +12,11 @@ class InfoByIfscCode(Resource):
     """
     @token_required
     def get(self, user):
-        if request.content_type != 'application/json':
-            return response('failed', 'Content-type must be json', 400)
-        get_data = request.get_json()
-        ifsc_code = get_data.get('ifsc')
-        
+        if request.content_type != 'x-www-form-urlencode':
+            return response('failed', 'Content-type must be x-www-form-urlencode', 400)
+        #get_data = request.get_json()
+        #ifsc_code = get_data.get('ifsc')
+        ifsc_code = request.args.get('ifsc')
         if ifsc_code is not None:
             bank_details = BankDetails.query.filter(func.lower(BankDetails.ifsc)==func.lower(ifsc_code)).first()
             if not bank_details:
@@ -32,13 +32,14 @@ class InfoByNameAndCity(Resource):
     """
     @token_required
     def get(self, user):
-        if request.content_type != 'application/json':
-            return response('failed', 'Content-type must be json', 400)
-        get_data = request.get_json()
-        bank_name = get_data.get('bank_name')
-        city = get_data.get('city')
-        limit = get_data.get('limit')
-        offset = get_data.get('offset')
+        if request.content_type != 'x-www-form-urlencode':
+            return response('failed', 'Content-type must be x-www-form-urlencode', 400)
+        #get_data = request.get_json()
+        bank_name = request.args.get('bank_name')
+        city = request.args.get('city')
+        limit = request.args.get('limit')
+        offset = request.args.get('offset')
+        print("BNAME:", bank_name, "City:", city,"Limit:",  limit,"Offset:", offset)
         if bank_name is not None and city is not None: 
             count = BankDetails.query.filter(and_(func.lower(BankDetails.bank_name)==func.lower(bank_name), func.lower(BankDetails.city) == func.lower(city))).count()
             if limit is None and offset is None:
